@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<div class="header">
+		<div id="drop_zone">Drop files here</div>
+		<output id="list"></output>
+	</div>
+</body>
+
+<script>
+    var dropZone = document.getElementById('drop_zone');
+    dropZone.addEventListener('dragover', handleDragOver, false);
+    dropZone.addEventListener('drop', handleFileSelect, false);
+    function handleFileSelect(evt) {
+        evt.preventDefault();
+        var files = evt.dataTransfer.files;
+        var output = [];
+        for (var i = 0, f; f = files[i]; i++) {
+            var reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    console.log('e readAsText = ', e);
+                    console.log('e readAsText target = ', e.target);
+                    try {
+                        json = JSON.parse(e.target.result);
+                        document.getElementById('list').innerHTML += '<pre draggable="true">' + JSON.stringify(json, null, 2) + '</pre>';
+
+
+                    } catch (ex) {
+                        document.getElementById('list').innerHTML = '<p>' + ('Не джейсон файл') + '</p>';
+
+
+                    }
+                };
+            })(f);
+            reader.readAsText(f);
+        }
+
+
+    }
+
+    function handleDragOver(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+    }
+
+
+
+</script>
+
+</html>

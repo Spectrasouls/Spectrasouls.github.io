@@ -1,0 +1,28 @@
+body {
+	background-color: #fff;
+}
+
+.header {
+	display: flex;
+	justify-content: space-around;
+}
+#drop_zone {
+	height: 300px;
+	width: 300px;
+	border: 2px dashed #bbb;
+	border-radius: 5px;
+	padding: 25px;
+	text-align: center;
+	color: #bbb;
+}
+
+#list {
+	position: relative;
+	height: 500px;
+	width: 500px;
+	border: 2px dashed #bbb;
+	border-radius: 5px;
+	padding: 25px;
+	text-align: center;
+	color: #333;
+}
